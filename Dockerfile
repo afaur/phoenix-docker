@@ -34,4 +34,7 @@ RUN mix archive.install --force https://github.com/phoenixframework/archives/raw
 # See http://www.phoenixframework.org/docs/installation#section-node-js-5-0-0-
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash - && apt-get install -y nodejs
 
+# install mix
+RUN yes | mix local.hex
+
 WORKDIR /code
