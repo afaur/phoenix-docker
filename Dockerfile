@@ -34,7 +34,12 @@ RUN mix archive.install --force https://github.com/phoenixframework/archives/raw
 # See http://www.phoenixframework.org/docs/installation#section-node-js-5-0-0-
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash - && apt-get install -y nodejs
 
-# install mix
+# install Hex and Rebar
 RUN yes | mix local.hex
+RUN yes | mix local.rebar
+
+# install zsh
+RUN yes | apt-get install zsh
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 WORKDIR /code
