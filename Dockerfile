@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:trusty
 
 MAINTAINER Marcelo Gonçalves <marcelocg@gmail.com>
 
