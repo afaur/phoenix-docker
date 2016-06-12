@@ -1,0 +1,43 @@
+box: kazw/elixir-phoenix-ci
+
+services:
+  - id: postgres
+    env:
+      USER: postgres
+      PASS: postgres
+
+dev:
+  steps:
+    - script:
+      name: Go to Project Root
+      code: cd $WERCKER_SOURCE_DIR
+
+    - script:
+      name: Download Dependencies
+      code: mix deps.get
+
+    - script:
+      name: Compile Project
+      code: mix deps.compile
+
+    - internal/shell:
+      cmd: /bin/zsh
+      code: "echo 'For an app console run: iex -S mix'"
+
+build:
+  steps:
+    - script:
+      name: Go to Project Root
+      code: cd $WERCKER_SOURCE_DIR
+
+    - script:
+      name: Download Dependencies
+      code: mix deps.get
+
+    - script:
+      name: Compile Dependencies
+      code: mix deps.compile
+
+    - script:
+      name: Run Test Suite
+      code: mix test

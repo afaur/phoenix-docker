@@ -6,7 +6,12 @@ It features all the latest versions of the Phoenix web framework, the Elixir lan
 
 Phoenix is a framework for building scalable web applications with realtime connectivity across all your devices. It relies on the Elixir language for making the development of maintainable applications productive and fun.
 
-### How to use this image
-
-    docker run -it --rm -v "$PWD":/code -w /phoenix marcelocg/phoenix mix phoenix.new /code/my_new_app
-
+### How to use this container
+```
+docker run -it --rm -v "$PWD":/code -w /code kazw/elixir-phoenix-ci mix test
+```
+Or
+```
+wercker build --direct-mount
+```
+Example [wercker.yml](wercker.yml)
