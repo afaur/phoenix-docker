@@ -17,13 +17,12 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y curl wget git-cor
 # http://blog.danielberkompas.com
 RUN touch /etc/init.d/couchdb
 
-# download and install Erlang package
+# Download and install Erlang and Elixir packages
 RUN wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
- && dpkg -i erlang-solutions_1.0_all.deb \
- && apt-get update
-
-# install latest elixir package
-RUN apt-get install -y elixir erlang-dev erlang-parsetools && rm erlang-solutions_1.0_all.deb
+  && dpkg -i erlang-solutions_1.0_all.deb \
+  && apt-get update \
+  && apt-get install -y elixir esl-erlang \
+  && rm erlang-solutions_1.0_all.deb
 
 ENV PHOENIX_VERSION 1.1.4
 
@@ -35,8 +34,8 @@ RUN mix archive.install --force https://github.com/phoenixframework/archives/raw
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash - && apt-get install -y nodejs
 
 # install Hex and Rebar
-RUN yes | mix local.hex
-RUN yes | mix local.rebar
+RUN yes | mix local.hex \
+  && yes | mix local.rebar
 
 # install zsh
 RUN apt-get install -y zsh
