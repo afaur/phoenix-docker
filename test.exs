@@ -13,10 +13,10 @@ config :logger, level: :warn
 if System.get_env("CI") == "true" do
   config :wercker_app, WerckerApp.Repo,
     adapter: Ecto.Adapters.Postgres,
-    database: System.get_env("POSTGRES_ENV_DB") || "wercker_app_test",
-    hostname: System.get_env("POSTGRES_PORT_5432_TCP_ADDR"),
     username: System.get_env("POSTGRES_ENV_USER") || "postgres",
     password: System.get_env("POSTGRES_ENV_PASS") || "postgres",
+    hostname: System.get_env("POSTGRES_PORT_5432_TCP_ADDR") || "localhost",
+    database: System.get_env("POSTGRES_ENV_DB") || "wercker_app_test",
     pool: Ecto.Adapters.SQL.Sandbox
 else
   config :wercker_app, WerckerApp.Repo,
