@@ -1,6 +1,8 @@
 FROM ubuntu:trusty
 
-MAINTAINER Marcelo Gonçalves <marcelocg@gmail.com>
+# Original Author
+# Marcelo Gonçalves
+MAINTAINER Kaz Walker <me@kaz.codes>
 
 # Elixir requires UTF-8
 RUN locale-gen en_US.UTF-8
