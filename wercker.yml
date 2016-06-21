@@ -31,6 +31,22 @@ build:
       code: cd $WERCKER_SOURCE_DIR
 
     - script:
+      name: Restore Cache
+      code: |
+        if [ -d "$WERCKER_CACHE_DIR/_build" ]; then
+          debug "copying _build directoy from cache."
+          cp -r $WERCKER_CACHE_DIR/_build .
+        else
+          debug "Unable to find previous _build directory."
+        fi
+        if [ -d "$WERCKER_CACHE_DIR/deps" ]; then
+          debug "copying _build directoy from cache."
+          cp -r $WERCKER_CACHE_DIR/deps .
+        else
+          debug "Unable to find previous deps directory."
+        fi
+
+    - script:
       name: Download Dependencies
       code: mix deps.get
 
@@ -41,3 +57,9 @@ build:
     - script:
       name: Run Test Suite
       code: mix test
+
+    - script:
+      name: Save Cache
+      code: |
+        cp -r _build $WERCKER_CACHE_DIR
+        cp -r deps $WERCKER_CACHE_DIR
